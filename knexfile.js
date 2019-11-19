@@ -37,6 +37,19 @@ module.exports = {
       tableName: 'knex_migrations'
     }
   },
+  testing: {
+    client: 'sqlite3',
+    connection: {
+      filename: './data//test.db3',
+    },
+    useNullAsDefault: true,
+    migrattions: {
+      directory: './data/migrations',
+    },
+    seeds: {
+      directory: './data/seeds',
+    },
+  },
 
   production: {
     client: 'pg',

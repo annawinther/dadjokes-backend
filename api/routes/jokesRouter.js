@@ -7,7 +7,7 @@ router.get('/', (req, res) => {
         .then(jokes => {
             res.status(200).json(jokes)
         })
-        .catch(err => {
+        .catch(() => {
             res.status(500).json({ message: 'could not get all jokes...:('})
         })
 })
