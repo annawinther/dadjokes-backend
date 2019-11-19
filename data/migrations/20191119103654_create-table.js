@@ -14,6 +14,8 @@ exports.up = function(knex) {
             .string("email")
             .notNullable()
             .unique();
+        tbl 
+            .string("jwt", 512);
     })
     .createTable("jokes", tbl => {
         tbl.increments()
