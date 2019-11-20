@@ -12,35 +12,35 @@ router.get('/', (req, res) => {
         })
 })
 
-router.get('/:id', (req, res) => {
-    const id = req.params.id
-    Jokes.findJokeById(id)
-        .then(joke => {
-            res.status(200).json(joke)
-        })
-        .catch(() => {
-            res.status(500).json({ message: "could not find joke with that id" })
-        })
-})
-// router.get("/:id", async (req, res) => {
-//     const { id } = req.params;
-//     // const { decodedJwt } = req;
-//     const userId = req.body.user_id;
-//     try {
-//       const joke = await Jokes.findJokeById(userId, id);
-//       if (!joke) {
-//         return res.status(400).json({
-//           error: "No joke found with the given id"
-//         });
-//       }
-//     //   joke.public = joke.public === 1 ? true : false;
-//       res.status(200).json(joke);
-//     } catch (error) {
-//       res.status(500).json({
-//         error: error.message
-//       });
-//     }
-//   });
+// router.get('/:id', (req, res) => {
+//     const id = req.params.id
+//     Jokes.findJokeById(id)
+//         .then(joke => {
+//             res.status(200).json(joke)
+//         })
+//         .catch(() => {
+//             res.status(500).json({ message: "could not find joke with that id" })
+//         })
+// })
+router.get("/:id", async (req, res) => {
+    const { id } = req.params;
+    const { decodedToken } = req;
+    const userId = decodedToken.sub;
+    try {
+      const joke = await Jokes.findJokeById(userId, id);
+      if (!joke) {
+        return res.status(400).json({
+          error: "No joke found with the given id"
+        });
+      }
+    //   joke.public = joke.public === 1 ? true : false;
+      res.status(200).json(joke);
+    } catch (error) {
+      res.status(500).json({
+        error: error.message
+      });
+    }
+  });
 
 router.post('/', (req, res) => {
     Jokes.addJoke(req.body)
@@ -57,7 +57,7 @@ router.post('/', (req, res) => {
 
     Jokes.deleteJoke(id)
         .then(() => {
-            res.status(200).json({message: `deleted joke with id of ${id}` })
+            res.status(200).json({ message: `deleted joke with id of ${id}` })
         })
         .catch(error => {
             res.status(500).json({ error: error.message})

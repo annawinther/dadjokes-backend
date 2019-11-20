@@ -46,7 +46,7 @@ function findJokeById(id){
         .where({ id })
         .first()
 }
-// async function findJokeById (userId, jokeId, options = { filter: {} }) {
+// async function findJokeById (userId, jokeId) {
 //     const [joke] = await db("jokes")
 //       .join("users", "users.id", "jokes.user_id")
 //       .groupBy("jokes.id")
@@ -59,8 +59,7 @@ function findJokeById(id){
 //       )
 //       .where({
 //         "jokes.user_id": userId,
-//         "jokes.id": jokeId,
-//         ...options.filter
+//         "jokes.id": jokeId
 //       });
 //     return joke;
 // }
