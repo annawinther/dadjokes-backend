@@ -10,7 +10,7 @@ describe('jokes model', () => {
     describe("insert function", () => {
         it('should insert jokes into the databse', async () => {
             const jokesNo = await db('jokes');
-            expect(jokesNo).ToHaveLengthOF(0)
+            expect(jokesNo).toHaveLength(0)
         })
     })
 })
