@@ -9,6 +9,7 @@ module.exports = {
 function getAllUsers(){
     return db('users')
 }
+
 function findById(id){
     return db('users')
         .where({ id })
@@ -18,10 +19,12 @@ function findById(id){
 function findBy(parameter){
     return db('users')
         .where(parameter)
+        .first()
+        // .update({ jwt: token })
 }
 
 async function addUser(user){
-    const id = await db('users').insert(user)
+    const [id] = await db('users').insert(user, 'id');
     return findById(id)
 }
 
