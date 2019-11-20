@@ -11,7 +11,6 @@ function restricted(req, res, next){
                 res.status(401).json({ message:  'you cannot enter without logging in' });
             } else {
                 req.decodedToken = decodedToken;
-                // console.log(decodedToken);
                 next();
             }
         })

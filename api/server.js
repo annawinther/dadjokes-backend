@@ -4,6 +4,7 @@ const helmet = require("helmet");
 const authRouter = require("./routes/authRoutes");
 const jokesRouter = require("./routes/jokesRouter");
 const publicJokesRouter = require("./routes/publicJokesRouter");
+const restricted = require('../middleware/restricted');
 
 const server = express();
 
@@ -11,7 +12,7 @@ server.use(express.json());
 server.use(helmet());
 server.use(cors());
 server.use('/api/auth', authRouter);
-server.use('/api/jokes', jokesRouter); 
+server.use('/api/jokes', restricted, jokesRouter); 
 server.use('/api/public-jokes', publicJokesRouter);
 
 server.get('/', (req, res) => {
