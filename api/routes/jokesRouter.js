@@ -1,8 +1,8 @@
 const router = require('express').Router();
-
+const restricted = require('../../middleware/restricted');
 const Jokes = require('../models/jokesModel');
 
-router.get('/', (req, res) => {
+router.get('/', restricted, (req, res) => {
     Jokes.getAllJokes()
         .then(jokes => {
             res.status(200).json(jokes)
@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => {
         .then(joke => {
             res.status(200).json(joke)
         })
-        .catch(err => {
+        .catch(() => {
             res.status(500).json({ message: "could not find joke with that id" })
         })
 })
