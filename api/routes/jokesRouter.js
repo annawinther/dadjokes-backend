@@ -45,7 +45,6 @@ router.get('/:id', (req, res) => {
 router.post('/', (req, res) => {
     Jokes.addJoke(req.body)
         .then(joke => {
-            // console.log("added joke!")
             res.status(201).json(joke)
         })
         .catch(() => {
