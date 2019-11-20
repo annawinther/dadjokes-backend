@@ -9,8 +9,17 @@ describe('jokes model', () => {
 
     describe("insert function", () => {
         it('should insert jokes into the databse', async () => {
-            const jokesNo = await db('jokes');
-            expect(jokesNo).toHaveLength(0)
+            let jokesNo 
+            jokesNo = await db('jokes');
+            expect(jokesNo).toHaveLength(0); 
+            await Jokes.addJoke({ 
+                setup: "How do you check if a webpage is HTML5?",
+                punchline: "Try it out on Internet Explorer",
+                public: "false",
+                user_id: 3
+             });
+            jokesNo = await db('jokes');
+            expect(jokesNo).toHaveLength(1);
         })
     })
 })

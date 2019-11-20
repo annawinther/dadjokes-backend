@@ -10,17 +10,16 @@ module.exports = {
 }
 
 function getAllJokes(){
-    return null
-//     return db('jokes')
-//         .join("users", "users.id", "jokes.user_id")
-//         .groupBy("jokes.id", "jokes.setup", "jokes.punchline", "jokes.public", "users.username")
-//         .select(
-//         "jokes.id",
-//         "jokes.setup",
-//         "jokes.punchline",
-//         "jokes.public",
-//         "users.username as user_username",
-//         )      
+    return db('jokes')
+        .join("users", "users.id", "jokes.user_id")
+        .groupBy("jokes.id", "jokes.setup", "jokes.punchline", "jokes.public", "users.username")
+        .select(
+        "jokes.id",
+        "jokes.setup",
+        "jokes.punchline",
+        "jokes.public",
+        "users.username as user_username",
+        )      
 }
 
 function findUsersJoke(userId){
@@ -66,6 +65,7 @@ function findJokeById(id){
 // }
 
 async function addJoke(joke){
+    // return null
     const [id] = await db('jokes').insert(joke, "id");
 
     return db('jokes')
