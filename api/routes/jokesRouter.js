@@ -1,8 +1,8 @@
 const router = require('express').Router();
-const restricted = require('../../middleware/restricted');
+// const restricted = require('../../middleware/restricted');
 const Jokes = require('../models/jokesModel');
 
-router.get('/', restricted, (req, res) => {
+router.get('/', (req, res) => {
     Jokes.getAllJokes()
         .then(jokes => {
             res.status(200).json(jokes)
