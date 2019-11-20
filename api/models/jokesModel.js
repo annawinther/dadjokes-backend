@@ -10,16 +10,17 @@ module.exports = {
 }
 
 function getAllJokes(){
-    return db('jokes')
-        .join("users", "users.id", "jokes.user_id")
-        .groupBy("jokes.id", "jokes.setup", "jokes.punchline", "jokes.public", "users.username")
-        .select(
-        "jokes.id",
-        "jokes.setup",
-        "jokes.punchline",
-        "jokes.public",
-        "users.username as user_username",
-        )      
+    return null
+//     return db('jokes')
+//         .join("users", "users.id", "jokes.user_id")
+//         .groupBy("jokes.id", "jokes.setup", "jokes.punchline", "jokes.public", "users.username")
+//         .select(
+//         "jokes.id",
+//         "jokes.setup",
+//         "jokes.punchline",
+//         "jokes.public",
+//         "users.username as user_username",
+//         )      
 }
 
 function findUsersJoke(userId){
