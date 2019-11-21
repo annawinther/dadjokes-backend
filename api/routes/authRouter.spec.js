@@ -12,14 +12,14 @@ beforeEach(async () => [
 describe('auth routes tests', () => {
     
     describe('POST /register',  () => {
-        test('should regster a new user', async () => {
+        it('should regster a new user', async () => {
             const newUser = await request(server)
             .post('/api/auth/register')
             .send({ username: 'zara', password: '1234', email: 'zara@test.com'});
             expect(newUser.body.username).toMatch(/zara/)
         })
 
-        test('should return a status of 201', async () => {
+        it('should return a status of 201', async () => {
             const response = await request(server)
             .post('/api/auth/register')
             .send({ username: 'zara', password: '1234', email: 'zara@test.com' })
@@ -28,7 +28,7 @@ describe('auth routes tests', () => {
     })
 
     describe('POST /login', () => {
-        test('should return 200 OK', async () => {
+        it('should return 200 OK', async () => {
             await db('users').insert({
                 username: 'zara',
                 password: bcrypt.hashSync('1234', 10),
@@ -39,7 +39,7 @@ describe('auth routes tests', () => {
             .send({ username: 'zara', password: '1234'})
             expect(response.status).toBe(200)
         })
-        test('should get token back', async () => {
+        it('should get token back', async () => {
             await db('users').insert({
                 username: 'zara',
                 password: bcrypt.hashSync('1234', 10),

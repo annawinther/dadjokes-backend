@@ -9,7 +9,7 @@ beforeEach(async () => {
 
 describe('jokes routes tests', () => {
     
-    describe('GET /',  () => [
+    describe('GET /',  () => {
         it('should return 200 OK', () => {
             return request(server).get('/api/public-jokes')
             .expect(200)
@@ -17,5 +17,5 @@ describe('jokes routes tests', () => {
             //     expect(res.body).toBe("Server running")
             // })
         })
-    ])
+    })
 })

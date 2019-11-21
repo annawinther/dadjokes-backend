@@ -64,25 +64,32 @@ function findJokeById(id){
 //     return joke;
 // }
 
-async function addJoke(joke){
+ function addJoke(joke){
     // return null
-    const [id] = await db('jokes').insert(joke, "id");
-    return db('jokes')
-        .where({ id })
-        .first()
+    // const [id] = await db('jokes').insert(joke, "id");
+    // return findJokeById(id)
+    return db('jokes').insert(joke, "id")
+     .then(ids => {
+            const [id] = ids;
+            return findJokeById(id);
+        })
 }
 
-function deleteJoke( jokeId){
+function deleteJoke(jokeId){
     // return null
     return db('jokes')
         .where({ id: jokeId })
         .delete()
 }
 
-function updateJoke(userId, jokeId, updated){
+ function updateJoke(jokeId, updated){
     return db('jokes')
-        .where({ user_id: userId, id: jokeId })
-        .update(updated)
+        .where({ id: jokeId })
+        .update(updated, "id")
+        // .then(ids => {
+        //     const [id] = ids;
+        //     return findJokeById(id);
+        // })
 }
 // async function findJokesById(userId, jokeId, options = { filter: {} }){
 //     const [joke] = await db("jokes").where({
