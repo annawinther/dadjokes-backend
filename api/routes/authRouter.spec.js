@@ -35,14 +35,22 @@ describe('auth routes tests', () => {
                 password: bcrypt.hashSync('1234', 10),
                 email: 'zara@test.com'
             })
-            // await Users.findBy({ 
-            //     username: 'zara',
-            //     password: bcrypt.hashSync('1234', 10) 
-            //     })
             const response =  await request(server)
             .post('/api/auth/login')
             .send({ username: 'zara', password: '1234'})
             expect(response.status).toBe(200)
+        })
+        test('should get token back', async () => {
+            await db('users').insert({
+                username: 'zara',
+                password: bcrypt.hashSync('1234', 10),
+                email: 'zara@test.com'
+            })
+            const response =  await request(server)
+            .post('/api/auth/login')
+            .send({ username: 'zara', password: '1234'})
+            .set('Content-Type', 'aaplication/json')
+            expect(response.body.token).toBeTruthy
         })
     })
 })
