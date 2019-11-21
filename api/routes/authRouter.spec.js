@@ -11,7 +11,6 @@ beforeEach(async () => [
 
 describe('auth routes tests', () => {
     
-
     describe('POST /register',  () => {
         test('should regster a new user', async () => {
             const newUser = await request(server)
@@ -33,7 +32,7 @@ describe('auth routes tests', () => {
             await db('users').insert({
                 username: 'zara',
                 password: bcrypt.hashSync('1234', 10),
-                email: 'zara@test.com'
+                email: 'zara@test.com',
             })
             const response =  await request(server)
             .post('/api/auth/login')
