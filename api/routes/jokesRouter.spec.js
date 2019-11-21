@@ -15,14 +15,14 @@ describe('jokes routes tests', () => {
             await db('users').insert({
                 username: 'test',
                 password: bcrypt.hashSync('1234', 10),
-                email: 'test@test.com'
+                email: 'test@test.com' 
             })
             const response =  await request(server)
             .post('/api/auth/login')
             .send({ username: 'test', password: '1234'})
 
             const token = response.body.token;
-            console.log(token);
+            // console.log(token);
             const responseAfterToken = await request(server).get("/api/jokes").set("authorization", token);
             expect(responseAfterToken.body.length).toEqual(0);
         })

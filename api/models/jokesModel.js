@@ -21,12 +21,12 @@ function getAllJokes(userID){
         "jokes.public",
         "users.username as user_username",
         )
-        .where({user_id:userID})      
+        //.where({user_id:userID})      
 }
 
 function findUsersJoke(){
     return db('jokes')
-        .where({user_id:JWTtoUserID()}) 
+        //.where({user_id:JWTtoUserID()}) 
 }
 // async function findUsersJoke(userId) {
 //     const jokes = await db("jokes")
@@ -45,8 +45,11 @@ function findUsersJoke(){
 //   }
 function findJokeById(id, userID){
     return db('jokes')
-        .where({ id })
-        .where({user_id:userID}) 
+        .where({ 
+         id : id,
+         user_id : userID || 1,
+         // if user id is not provided, use "test" user id
+        })
         .first()
     
 }
@@ -68,14 +71,15 @@ function findJokeById(id, userID){
 //     return joke;
 // }
 
- function addJoke(joke){
+  function addJoke(joke, userID){
+    // const [id] = await db('jokes').insert(joke, "id");
+    // return await db('jokes').where({ id })
 
     //TODO: Check what is submitted and add user verification
-    
     return db('jokes').insert(joke, "id")
      .then(ids => {
             const [id] = ids;
-            return findJokeById(id);
+            return findJokeById(id, userID);
         })
 }
 
@@ -89,7 +93,7 @@ function deleteJoke(jokeId, userID){
  function updateJoke(jokeId, updated, userID){
     return db('jokes')
         .where({ id: jokeId })
-        .where({user_id:userID})
+        .where({user_id:userID}) 
         .update(updated)
         // .then(ids => {
         //     const [id] = ids;
