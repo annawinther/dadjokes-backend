@@ -76,7 +76,6 @@ function findJokeById(id){
 }
 
 function deleteJoke(jokeId){
-    // return null
     return db('jokes')
         .where({ id: jokeId })
         .delete()
@@ -85,7 +84,7 @@ function deleteJoke(jokeId){
  function updateJoke(jokeId, updated){
     return db('jokes')
         .where({ id: jokeId })
-        .update(updated, "id")
+        .update(updated)
         // .then(ids => {
         //     const [id] = ids;
         //     return findJokeById(id);
