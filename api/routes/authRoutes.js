@@ -5,7 +5,7 @@ const jwt = require('jsonwebtoken');
 
 const Users = require('../models/authModels');
 const secrets = require('../../config/secret');
-const db = require('../../data/dbConfig');
+// const db = require('../../data/dbConfig');
 
 router.post('/register', async (req, res) => {
     let { email, password, username } = req.body;
