@@ -7,7 +7,7 @@ describe('jokes model', () => {
         await db('jokes').truncate();
     });
 
-    describe("insert function", () => {
+    describe("insert jokes function", () => {
         it('should insert jokes into the databse', async () => {
             let jokesNo 
             jokesNo = await db('jokes');
@@ -20,6 +20,17 @@ describe('jokes model', () => {
              });
             jokesNo = await db('jokes');
             expect(jokesNo).toHaveLength(1);
+        })
+    });
+
+    describe("delete jokes function", () => {
+        it('should delete joke from the db', async () => {
+            let JokeNum 
+            JokeNum = await db('jokes');
+            expect(JokeNum).toHaveLength(0);
+            await Jokes.deleteJoke({
+                id: "jokeId"
+         })
         })
     })
 })

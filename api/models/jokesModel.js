@@ -67,13 +67,13 @@ function findJokeById(id){
 async function addJoke(joke){
     // return null
     const [id] = await db('jokes').insert(joke, "id");
-
     return db('jokes')
         .where({ id })
         .first()
 }
 
 function deleteJoke( jokeId){
+    // return null
     return db('jokes')
         .where({ id: jokeId })
         .delete()
