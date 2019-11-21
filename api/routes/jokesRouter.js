@@ -1,20 +1,27 @@
 const router = require('express').Router();
 // const restricted = require('../../middleware/restricted');
 const Jokes = require('../models/jokesModel');
+const JWTtoUserID = require('../../middleware/jwt');
 
 router.get('/', (req, res) => {
-    Jokes.getAllJokes()
+    const authHeader = req.headers.authorization;
+    const userID = JWTtoUserID(authHeader);
+
+    Jokes.getAllJokes(userID)
         .then(jokes => {
             res.status(200).json(jokes)
         })
-        .catch(() => {
+        .catch((error) => {
             res.status(500).json({ message: 'could not get all jokes...:(' })
         })
 })
 
 router.get('/:id', (req, res) => {
+    const authHeader = req.headers.authorization;
+    const userID = JWTtoUserID(authHeader);
+
     const id = req.params.id
-    Jokes.findJokeById(id)
+    Jokes.findJokeById(id, userID)
         .then(joke => {
             res.status(200).json(joke)
         })
@@ -43,6 +50,7 @@ router.get('/:id', (req, res) => {
   // });
 
 router.post('/', (req, res) => {
+
     Jokes.addJoke(req.body)
         .then(joke => {
             res.status(201).json(joke)
@@ -55,7 +63,10 @@ router.post('/', (req, res) => {
  router.delete('/:id', (req, res) => {
     const id = req.params.id;
 
-    Jokes.deleteJoke(id)
+    const authHeader = req.headers.authorization;
+    const userID = JWTtoUserID(authHeader);
+
+    Jokes.deleteJoke(id, userID)
         .then(() => {
             res.status(200).json({ message: `deleted joke with id of ${id}` })
         })
@@ -67,9 +78,11 @@ router.post('/', (req, res) => {
  router.put('/:id', (req, res) => {
    const id = req.params.id;
    const body = req.body;
-  //  const { user_id } = req.body
 
-   Jokes.updateJoke(id, body)
+  const authHeader = req.headers.authorization;
+  const userID = JWTtoUserID(authHeader);
+
+   Jokes.updateJoke(id, body, userID)
    .then(joke => {
      res.status(200).json({ message: `Joke with id of ${id} has been updated successfully!`, joke})
    })

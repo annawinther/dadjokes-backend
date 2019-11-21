@@ -2,6 +2,8 @@ const jwt = require('jsonwebtoken');
 const secret = require('../config/secret');
 // const db = require('../data/dbConfig');
 
+module.exports = restricted;
+
 function restricted(req, res, next){
     const authHeaderIsPresent = req.headers.authorization;
 
@@ -19,4 +21,3 @@ function restricted(req, res, next){
     }
 }
 
-module.exports = restricted;

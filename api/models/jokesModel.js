@@ -1,4 +1,5 @@
 const db = require('../../data/dbConfig');
+const JWTtoUserID = require('../../middleware/jwt');
 
 module.exports = {
     getAllJokes,
@@ -9,7 +10,7 @@ module.exports = {
     updateJoke,
 }
 
-function getAllJokes(){
+function getAllJokes(userID){
     return db('jokes')
         .join("users", "users.id", "jokes.user_id")
         .groupBy("jokes.id", "jokes.setup", "jokes.punchline", "jokes.public", "users.username")
@@ -19,12 +20,13 @@ function getAllJokes(){
         "jokes.punchline",
         "jokes.public",
         "users.username as user_username",
-        )      
+        )
+        .where({user_id:userID})      
 }
 
-function findUsersJoke(userId){
+function findUsersJoke(){
     return db('jokes')
-        .where({ user_id: userId })
+        .where({user_id:JWTtoUserID()}) 
 }
 // async function findUsersJoke(userId) {
 //     const jokes = await db("jokes")
@@ -41,10 +43,12 @@ function findUsersJoke(userId){
   
 //     return jokes;
 //   }
-function findJokeById(id){
+function findJokeById(id, userID){
     return db('jokes')
         .where({ id })
+        .where({user_id:userID}) 
         .first()
+    
 }
 // async function findJokeById (userId, jokeId) {
 //     const [joke] = await db("jokes")
@@ -65,9 +69,9 @@ function findJokeById(id){
 // }
 
  function addJoke(joke){
-    // return null
-    // const [id] = await db('jokes').insert(joke, "id");
-    // return findJokeById(id)
+
+    //TODO: Check what is submitted and add user verification
+    
     return db('jokes').insert(joke, "id")
      .then(ids => {
             const [id] = ids;
@@ -75,15 +79,17 @@ function findJokeById(id){
         })
 }
 
-function deleteJoke(jokeId){
+function deleteJoke(jokeId, userID){
     return db('jokes')
         .where({ id: jokeId })
+        .where({user_id:userID})
         .delete()
 }
 
- function updateJoke(jokeId, updated){
+ function updateJoke(jokeId, updated, userID){
     return db('jokes')
         .where({ id: jokeId })
+        .where({user_id:userID})
         .update(updated)
         // .then(ids => {
         //     const [id] = ids;

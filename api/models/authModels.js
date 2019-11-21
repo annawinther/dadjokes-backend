@@ -7,6 +7,7 @@ module.exports = {
     findBy,
     addUser
 }
+
 function getAllUsers(){
     return db('users')
 }
