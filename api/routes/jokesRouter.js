@@ -50,12 +50,14 @@ router.get('/:id', (req, res) => {
   // });
 
 router.post('/', (req, res) => {
+    const authHeader = req.headers.authorization;
+    const userID = JWTtoUserID(authHeader);
 
-    Jokes.addJoke(req.body)
+    Jokes.addJoke(req.body, userID)
         .then(joke => {
             res.status(201).json(joke)
         })
-        .catch(() => {
+        .catch((err) => {
             res.status(500).json({ message: "could not add joke" });
             })
  })

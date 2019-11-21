@@ -21,7 +21,7 @@ function getAllJokes(userID){
         "jokes.public",
         "users.username as user_username",
         )
-        //.where({user_id:userID})      
+        .where({user_id:userID})      
 }
 
 function findUsersJoke(){
