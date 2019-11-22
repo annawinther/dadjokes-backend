@@ -1,4 +1,5 @@
 # API Documentation
+API is hosed at https://dadjokesapp.herokuapp.com/public-jokes
 
 Note: all API requests expect an Authorization header containing the token for the currently logged-in user.
 
@@ -7,8 +8,8 @@ Note: all API requests expect an Authorization header containing the token for t
 | Method       | Endpoint       | Description                                                                      |
 | :-----------:|:-------------: | :------------------------------------------------------------------------------: | 
 |      GET     | /public-jokes  | Returns a list of jokes that are listed as `public` for anyone to see            |
-|      POST    | /auth/register |Creates a new user using the information sent inside the request body             |
-|      POST    | /auth/login    |  Logs in user using the information sent inside the request body                 |
+|      POST    | /auth/register | Creates a new user using the information sent inside the request body            |
+|      POST    | /auth/login    | Logs in user using the information sent inside the request body                  |
 |      GET     | /api/jokes     | Returns an list of all jokes that belongs to the logged in user                  |
 |      POST    | /api/jokes     | Creates a new joke using the information sent in the request body                |
 |      GET     | /api/jokes/:id | Returns the joke with the id, also only those that belong to the logged in  user |
