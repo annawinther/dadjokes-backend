@@ -11,9 +11,9 @@ const server = express();
 server.use(express.json());
 server.use(helmet());
 server.use(cors());
-server.use('/api/auth', authRouter);
+server.use('/auth', authRouter);
 server.use('/api/jokes', restricted, jokesRouter); 
-server.use('/api/public-jokes', publicJokesRouter);
+server.use('/public-jokes', publicJokesRouter);
 
 server.get('/', (req, res) => {
     res.status(200).json("Server running")

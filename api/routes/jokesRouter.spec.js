@@ -18,7 +18,7 @@ describe('jokes routes tests', () => {
                 email: 'test@test.com' 
             })
             const response =  await request(server)
-            .post('/api/auth/login')
+            .post('/auth/login')
             .send({ username: 'test', password: '1234'})
 
             const token = response.body.token;
