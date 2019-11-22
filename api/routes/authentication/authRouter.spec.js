@@ -1,8 +1,7 @@
 /* eslint-disable no-undef */
-const db = require('../../data/dbConfig')
+const db = require('../../../data/dbConfig')
 const request = require('supertest');
-const server = require('../server');
-// const Users = require('../models/authModels')
+const server = require('../../server');
 const bcrypt = require('bcryptjs');
 
 beforeEach(async () => [

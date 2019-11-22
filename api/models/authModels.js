@@ -1,5 +1,4 @@
 const db = require('../../data/dbConfig');
-// const jwt = require('jsonwebtoken');
 
 module.exports = {
     getAllUsers,
@@ -22,11 +21,9 @@ function findBy(parameter){
     return db('users')
         .where(parameter)
         .first();
-        // .update({ jwt: parameter.jwt })
 }
 
 async function addUser(user){
-    // return null
     const [id] = await db('users').insert(user, 'id');
     return findById(id)
 }

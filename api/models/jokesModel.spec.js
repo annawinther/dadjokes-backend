@@ -43,8 +43,6 @@ describe('jokes model', () => {
              //Expect deletion to return to ID of the deleted joke
              expect(deletedJoke).toBe(newJoke.id);
 
-             //Delete the joke
-
         })
     });
     
@@ -74,7 +72,7 @@ describe('jokes model', () => {
             expect(getUpdatedJoke[0].setup).toMatch(/UpdatedNewJoke/); 
 
             //Delete the new joke, as we do not need it
-            console.log(await Jokes.deleteJoke(newJoke.id, 1)); 
+            await Jokes.deleteJoke(newJoke.id, 1); 
         })
     })
 })
