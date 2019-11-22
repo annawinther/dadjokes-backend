@@ -2,7 +2,6 @@
 const db = require('../../../data/dbConfig')
 const request = require('supertest');
 const server = require('../../server');
-// const Users = require('../models/authModels')
 const bcrypt = require('bcryptjs');
 
 beforeEach(async () => [

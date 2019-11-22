@@ -1,5 +1,4 @@
 const db = require('../../data/dbConfig');
-// const JWTtoUserID = require('../../middleware/jwt');
 
 module.exports = {
     getAllJokes,

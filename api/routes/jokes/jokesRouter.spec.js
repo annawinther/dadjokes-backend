@@ -22,7 +22,6 @@ describe('jokes routes tests', () => {
             .send({ username: 'test', password: '1234'})
 
             const token = response.body.token;
-            // console.log(token);
             const responseAfterToken = await request(server).get("/api/jokes").set("authorization", token);
             expect(responseAfterToken.body.length).toEqual(0);
         })
