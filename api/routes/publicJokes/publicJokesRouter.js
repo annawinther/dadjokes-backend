@@ -1,5 +1,5 @@
 const router = require("express").Router();
-const PJokes = require('../models/publicJokesModel');
+const PJokes = require('../../models/publicJokesModel');
 
 router.get('/', (req, res) => {
   PJokes.getPublicJokes()

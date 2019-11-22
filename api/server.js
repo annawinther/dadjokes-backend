@@ -1,9 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const helmet = require("helmet");
-const authRouter = require("./routes/authRoutes");
-const jokesRouter = require("./routes/jokesRouter");
-const publicJokesRouter = require("./routes/publicJokesRouter");
+const authRouter = require("./routes/authentication/authRoutes");
+const jokesRouter = require("./routes/jokes/jokesRouter");
+const publicJokesRouter = require("./routes/publicJokes/publicJokesRouter");
 const restricted = require('../middleware/restricted');
 
 const server = express();

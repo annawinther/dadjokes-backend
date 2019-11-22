@@ -1,7 +1,7 @@
 const router = require('express').Router();
 // const restricted = require('../../middleware/restricted');
-const Jokes = require('../models/jokesModel');
-const JWTtoUserID = require('../../middleware/jwt');
+const Jokes = require('../../models/jokesModel');
+const JWTtoUserID = require('../../../middleware/jwt');
 
 router.get('/', (req, res) => {
     const authHeader = req.headers.authorization;
@@ -11,7 +11,7 @@ router.get('/', (req, res) => {
         .then(jokes => {
             res.status(200).json(jokes)
         })
-        .catch((error) => {
+        .catch(() => {
             res.status(500).json({ message: 'could not get all jokes...:(' })
         })
 })
@@ -29,25 +29,7 @@ router.get('/:id', (req, res) => {
             res.status(500).json({ message: "could not find joke with that id" })
         })
 })
-// router.get("/:id", async (req, res) => {
-//     const { id } = req.params;
-//     const { decodedToken } = req;
-//     const userId = decodedToken.sub;
-//     try {
-//       const joke = await Jokes.findJokeById(userId, id);
-//       if (!joke) {
-//         return res.status(400).json({
-//           error: "No joke found with the given id"
-//         });
-//       }
-    //   joke.public = joke.public === 1 ? true : false;
-  //     res.status(200).json(joke);
-  //   } catch (error) {
-  //     res.status(500).json({
-  //       error: error.message
-  //     });
-  //   }
-  // });
+
 
 router.post('/', (req, res) => {
     const authHeader = req.headers.authorization;
@@ -57,7 +39,7 @@ router.post('/', (req, res) => {
         .then(joke => {
             res.status(201).json(joke)
         })
-        .catch((err) => {
+        .catch(() => {
             res.status(500).json({ message: "could not add joke" });
             })
  })
