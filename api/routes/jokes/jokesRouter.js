@@ -1,7 +1,7 @@
 const router = require('express').Router();
-// const restricted = require('../../middleware/restricted');
 const Jokes = require('../../models/jokesModel');
 const JWTtoUserID = require('../../../middleware/jwt');
+const validateJoke = require('../../../middleware/validateJoke');
 
 router.get('/', (req, res) => {
     const authHeader = req.headers.authorization;
@@ -31,7 +31,7 @@ router.get('/:id', (req, res) => {
 })
 
 
-router.post('/', (req, res) => {
+router.post('/', validateJoke, (req, res) => {
     const authHeader = req.headers.authorization;
     const userID = JWTtoUserID(authHeader);
 
@@ -59,7 +59,7 @@ router.post('/', (req, res) => {
         })
  })
 
- router.put('/:id', (req, res) => {
+ router.put('/:id', validateJoke, (req, res) => {
    const id = req.params.id;
    const body = req.body;
 
@@ -74,6 +74,7 @@ router.post('/', (req, res) => {
      res.status(500).json({ error: err.message})
    })
  })
+
 
 
 module.exports = router;
