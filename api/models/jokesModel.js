@@ -50,13 +50,13 @@ function findJokeById(id, userID){
 function deleteJoke(jokeId, userID){
     return db('jokes')
         .where({ id: jokeId })
-        .where({user_id:userID})
+        .where({ user_id: userID })
         .delete()
 }
 
  function updateJoke(jokeId, updated, userID){
     return db('jokes')
         .where({ id: jokeId })
-        .where({user_id:userID}) 
+        .where({ user_id: userID }) 
         .update(updated)
 }
