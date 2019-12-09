@@ -63,8 +63,8 @@ router.post('/', validateJoke, (req, res) => {
    const id = req.params.id;
    const body = req.body;
 
-  const authHeader = req.headers.authorization;
-  const userID = JWTtoUserID(authHeader);
+   const authHeader = req.headers.authorization;
+   const userID = JWTtoUserID(authHeader);
 
    Jokes.updateJoke(id, body, userID)
    .then(joke => {

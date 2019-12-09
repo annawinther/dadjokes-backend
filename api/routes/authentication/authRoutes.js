@@ -28,7 +28,7 @@ router.post('/register', async (req, res) => {
 })
 
 router.post('/login',  (req, res) => {
-    let {username, password } = req.body;
+    let { username, password } = req.body;
    
     Users.findBy({ username })
         .then(user => {
